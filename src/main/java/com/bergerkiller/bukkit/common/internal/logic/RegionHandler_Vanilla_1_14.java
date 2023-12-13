@@ -265,7 +265,10 @@ class RegionHandler_Vanilla_1_14 extends RegionHandlerVanilla {
          * <FIND_REGION_FILE_CACHE_STORAGE>
          * public static Long2ObjectLinkedOpenHashMap findRegionFileCache(RegionFileCache rfc) {
          * #if version >= 1.17
-         *     #require net.minecraft.world.level.chunk.storage.RegionFileCache private Long2ObjectLinkedOpenHashMap<RegionFile> regionCache;
+         *     #if exists net.minecraft.world.level.chunk.storage.RegionFileCache public final Long2ObjectLinkedOpenHashMap<com.universeprojects.util.AbstractRegionFile> regionCache;
+         *        #require net.minecraft.world.level.chunk.storage.RegionFileCache public final Long2ObjectLinkedOpenHashMap<com.universeprojects.util.AbstractRegionFile> regionCache;
+         *     #else
+         *        #require net.minecraft.world.level.chunk.storage.RegionFileCache private Long2ObjectLinkedOpenHashMap<RegionFile> regionCache;
          * #else
          *     #require net.minecraft.world.level.chunk.storage.RegionFileCache private Long2ObjectLinkedOpenHashMap<RegionFile> regionCache:cache;
          * #endif
@@ -277,7 +280,10 @@ class RegionHandler_Vanilla_1_14 extends RegionHandlerVanilla {
 
         /*
          * <FIND_CACHE_REGION_FILES>
-         * public static Collection<RegionFile> findWorldRegionFileInstances(Long2ObjectLinkedOpenHashMap cache) {
+         * #if exists net.minecraft.world.level.chunk.storage.RegionFileCache public static Collection<RegionFile> findWorldRegionFileInstances(Long2ObjectLinkedOpenHashMap cache) {
+         *   public static Collection<RegionFile> findWorldRegionFileInstances(Long2ObjectLinkedOpenHashMap cache) {
+         * #else
+         *   public static Collection<com.universeprojects.util.AbstractRegionFile> findWorldRegionFileInstances(Long2ObjectLinkedOpenHashMap cache) {
          *     return cache.values();
          * }
          */
