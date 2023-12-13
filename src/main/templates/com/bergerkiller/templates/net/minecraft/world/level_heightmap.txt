@@ -34,7 +34,10 @@ class HeightMap {
 
 #if version >= 1.18
     public int getHeight:getFirstAvailable(int x, int z);
-    private void setHeight(int x, int z, int height);
+    #if exists net.minecraft.world.level.levelgen private void setHeight(int x, int z, int height);
+        private void setHeight(int x, int z, int height);
+    #else
+        public void setHeight(int x, int z, int height);
 #elseif version >= 1.13
     public int getHeight:a(int x, int z);
     private void setHeight:a(int x, int z, int height);
